@@ -1,0 +1,172 @@
+{
+    "_default": {
+        "1": {
+            "title": "Backend Development for eCommerce Platform",
+            "type": "experience",
+            "description": "Developed RESTful APIs for handling user management, product listings, and order processing for an eCommerce application.",
+            "technologies": [
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "Docker"
+            ],
+            "id": 10100
+        },
+        "2": {
+            "title": "Mobile App Development for Fitness Tracker",
+            "type": "experience",
+            "description": "Built a cross-platform mobile app for tracking fitness routines, logging workouts, and monitoring progress over time.",
+            "technologies": [
+                "Flutter",
+                "Dart",
+                "Firebase",
+                "Git"
+            ],
+            "id": 10200
+        },
+        "3": {
+            "title": "Data Analysis on Social Media Trends",
+            "type": "experience",
+            "description": "Conducted exploratory data analysis on social media interactions to identify trends and patterns in user engagement and sentiment.",
+            "technologies": [
+                "Python",
+                "Pandas",
+                "Seaborn",
+                "Jupyter Notebook"
+            ],
+            "id": 10300
+        },
+        "4": {
+            "title": "Recommendation Engine for Online Store",
+            "type": "experience",
+            "description": "Designed a collaborative filtering recommendation system to suggest relevant products to users based on browsing history and preferences.",
+            "technologies": [
+                "Python",
+                "Scikit-learn",
+                "NumPy",
+                "Flask"
+            ],
+            "id": 10400
+        },
+        "5": {
+            "title": "Building Real-time Chat Application",
+            "type": "experience",
+            "description": "Implemented a web-based real-time chat application with individual and group messaging features.",
+            "technologies": [
+                "React",
+                "Node.js",
+                "Socket.IO",
+                "Heroku"
+            ],
+            "id": 10500
+        },
+        "6": {
+            "title": "Image Processing for Object Detection",
+            "type": "experience",
+            "description": "Created an image processing pipeline to detect and classify objects in real-time using pre-trained convolutional neural networks.",
+            "technologies": [
+                "Python",
+                "OpenCV",
+                "TensorFlow",
+                "Keras"
+            ],
+            "id": 10600
+        },
+        "7": {
+            "title": "Sentiment Analysis of Movie Reviews",
+            "type": "experience",
+            "description": "Developed a natural language processing model to classify movie reviews into positive and negative sentiments.",
+            "technologies": [
+                "Python",
+                "NLTK",
+                "Scikit-learn",
+                "Matplotlib"
+            ],
+            "id": 10700
+        },
+        "8": {
+            "title": "IoT-Based Smart Home System",
+            "type": "experience",
+            "description": "Developed a prototype for a smart home system that allows users to control lighting, temperature, and security remotely.",
+            "technologies": [
+                "Arduino",
+                "C++",
+                "MQTT",
+                "Raspberry Pi"
+            ],
+            "id": 10800
+        },
+        "9": {
+            "title": "Customer Segmentation for Retail Data",
+            "type": "experience",
+            "description": "Utilized clustering techniques to segment customers based on purchase behavior, improving targeted marketing efforts.",
+            "technologies": [
+                "Python",
+                "Pandas",
+                "Scikit-learn",
+                "Matplotlib"
+            ],
+            "id": 10900
+        },
+        "10": {
+            "title": "Financial Forecasting with Time Series Analysis",
+            "type": "experience",
+            "description": "Analyzed historical financial data and developed models to forecast stock prices using ARIMA and LSTM models.",
+            "technologies": [
+                "Python",
+                "Pandas",
+                "TensorFlow",
+                "Keras"
+            ],
+            "id": 11000
+        },
+        "11": {
+            "title": "Interactive Data Visualization Dashboard",
+            "type": "experience",
+            "description": "Created a web-based interactive dashboard for visualizing and analyzing key business metrics and KPIs.",
+            "technologies": [
+                "JavaScript",
+                "D3.js",
+                "HTML",
+                "CSS"
+            ],
+            "id": 11100
+        },
+        "12": {
+            "title": "Optimizing SQL Queries for Performance",
+            "type": "experience",
+            "description": "Analyzed and optimized complex SQL queries for improved performance on large datasets in a relational database.",
+            "technologies": [
+                "SQL",
+                "PostgreSQL",
+                "Indexing",
+                "Query Optimization"
+            ],
+            "id": 11200
+        },
+        "13": {
+            "title": "Voice Recognition System Development",
+            "type": "experience",
+            "description": "Developed a basic voice recognition system for identifying speaker commands and translating them into actions.",
+            "technologies": [
+                "Python",
+                "SpeechRecognition",
+                "PyTorch",
+                "Librosa"
+            ],
+            "id": 11300
+        },
+        "14": {
+            "title": "Simulation of Autonomous Vehicles in Urban Traffic",
+            "type": "experience",
+            "description": "Simulated urban traffic scenarios to analyze autonomous vehicle behavior and optimize route planning algorithms.",
+            "technologies": [
+                "Python",
+                "SUMO",
+                "OpenAI Gym",
+                "TensorFlow"
+            ],
+            "id": 11400
+        }
+    }
+}

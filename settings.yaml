@@ -1,0 +1,106 @@
+# db name and path
+db_path : "./"
+db_name : 'db.json'
+cv_db_name: 'cv_db.json'
+
+scraper_parameters : 
+  chrome_executable_path: "/usr/bin/chromedriver" # Custom Chrome executable path (e.g. /foo/bar/bin/chromedriver)
+  chrome_binary_location: "/usr/bin/google-chrome"  # Custom path to Chrome/Chromium binary (e.g. /foo/bar/chrome-mac/Chromium.app/Contents/MacOS/Chromium)
+  chrome_options: None  # Custom Chrome options here
+  headless: True  # Overrides headless mode only if chrome_options is None
+  max_workers: 1  # How many threads will be spawned to run queries concurrently (one Chrome driver for each thread)
+  slow_mo: 0.5  # Slow down the scraper to avoid 'Too many requests 429' errors (in seconds)
+  page_load_timeout: 50  # Page load timeout (in seconds)    
+
+serach_queries:
+  - search_04: 
+      query: 'machine learing'
+      locations: ['Germany']
+      apply_link: True  # Try to extract apply link (easy applies are skipped). If set to True, scraping is slower because an additional page must be navigated. Default to False.
+      skip_promoted_jobs: False  # Skip promoted jobs. Default to False.
+      page_offset: 0  # How many pages to skip
+      limit: 30
+      # company_jobs_url='https://www.linkedin.com/jobs/search/?f_C=1441%2C17876832%2C791962%2C2374003%2C18950635%2C16140%2C10440912&geoId=92000000',  # Filter by companies.                
+      relevance: 'RECENT' # RECENT or RELEVENT
+      time: "MONTH" #TODO: add other options 
+      type: ["FULL_TIME","PART_TIME","CONTRACT","INTERNSHIP"] #TODO: add other options 
+      experience: ["ENTRY_LEVEL","ASSOCIATE"] #TODO: add other options 
+      work_env: ["REMOTE","HYBRID"] #TODO: add other options
+      # experience: [MID_SENIOR] #TODO: add other options
+      # base_salary: "SALARY_100K" #TODO: add other options
+
+# apply for a specific job we have its job id
+search_by_id :
+  state : True
+  ID_list: [3938749506, 3969091102, 3972217964, 3972218932, 3973656266, 3978671331, 3979357491, 3980776165, 3982921384, 3984574100, 3986110994, 3986517209, 3987049354, 3987946670, 3987960663, 3988022859, 3988401079, 3988722931, 3989344444, 3992436189, 3993251445, 3993438475, 3993470822, 3993474280, 3993474335, 3993762992, 3994774404, 3995922041, 3997724642, 3998078976, 3998271333, 3998527159, 3998556793, 3998767465, 3998767480, 3999510386, 3999539521, 3999746576, 4000172836, 4001456607, 4001492165, 4001535900, 4001536238, 4001853709, 4002970263, 4002973105, 4003262010, 4003325109, 4003380584, 4003555693, 4004278225, 4004285913, 4004976018, 4005303878, 4005306940, 4005386030, 4005636684, 4006864057, 4006876778, 4007773450, 4007775198, 4008008235, 4008287455, 4009521181, 4010378521]
+
+API_KEY: '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'
+
+#system prompt for openai
+SYS_CONT : |
+You are to assess the suitability of a candidate for a job based onthe provided job description and the candidate's brief information (from their CV and a questionnaire).Your task is to return a score between 0 and 100, which reflects how well the candidate matches the job requirements. IMPORTANT, if the job description specifies German (or anything rather English) Language requirements as mandatory and the candidate does not meet these, you must return a score of -1.
+
+SELF_INFO: |
+  
+  EDUCATION:[[{"degree":"DEGREE","institution":"UNIVERSITY","field":"YOUR SUBJECT","period":"TIME","courses":[{"title":"COURESE TITLE","description":"DESCRIPTION."}]}]
+  ]
+
+  SKILLS=Programming Languages [Python (2/3), Java (SCOURE/3),...]; Scientific Computing [Numpy(2/3), Pytorch(2/3), ...]; Development Tools [Git(2/3), Linux(2/3)...]; ...]
+
+  EXPERIENCES=[{"_default":{"1":{"title":"EXPERIENCE","type":"experience","description":"DESCRITPIOIN","technologies":[TECHNOLOGIES USED]}}]
+
+  SOME_OF_THINGS_I_LIKE =[{"categories":{"OS_hardware_abstraction_level":{"examples":["Linux"]},"distributed_systems":{"examples":["GPUs","HPC"]}}}]
+  ]
+
+  CERTIFICATES= [...]
+
+  SOME_OF_MY_FAVOURITE_JOB_TITLES(RATE)=[...]
+
+  PREFERED_JOB_LOCATION=[...]
+
+RESPONSE_FORMAT: |
+  {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "extracted_data",
+        "strict": True,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "score": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": ["score", "description"],
+            "additionalProperties": False
+        }
+    }
+  }
+
+model : gpt-4o-mini
+
+SCROE_THRESHOLD: 60
+NR_EXPERIENCES: 5
+
+MOTIV_TEMP : |
+  Dear Hiring Manager, 
+  PARAGRAPH_1:[I am writing to express my enthusiasm for the [JOB_TITLE] position at [COMPANY_NAME], as advertised. Having a background in [MY_RELATED_BACKGROUND],I am eager to contribute to your team, particularly [RELEVANT_JOB_RESPONSIBILITIES]].
+  PARAGRAPH_2: THIS PARAGRAPH EXPLAINS WHY I APPLY FOR THIS JOB. ENTHUSIASM TO COMBINE THIS FIELD WITH RELATED AI DOMAINS AND BIONINFORMATIC (LIFE SCIENCE), WITH SOME EXAMPLES IN LIFE SCIENCE. [My deep fascination with [THE JOB SPECIFIC AREA, TECHNOLOGY AND DISCIPLINE], especially their transformative potential in life science and medicine, is a driving force behind my application for this role. Through my studies and experiences, I have been inspired by how these technologies can [A CREATE AND IMPACTFUL EXAMPLE OF APPLICATION OF JOB FIELD IN LIFE SCIENCE AND BIOINFORMATIC]. I am passionate about being at the forefront of this intersection between technology and life sciences, and I believe that this role and work being done on [COMPANY_NAME] will build up will provide knowledge and expertise to pursue this goal in my professional career.]
+  PARAGRAPH_3: THIS PARAGRAPH EXPLAINS MY  RELEVANT SKILLS AND EXPERIENCES, ITS RESULTS AS WELL AS MY OTHER SKILLS AND EXPERIENCES WITH THEIR BENEFITS[Throughout my academic journey and self-directed learning, I have actively involved to gain experience across a diverse range of topics, driven by a passion for learning and creating. I have tried to [MY RELEVANT SKILLS AND EXPERIENCES TO THIS JOB]. Additionally, [MY OTHER SKILLS AND EXPERIENCES] While these areas may not be directly related to the role, I believe they will enhance my ability to think creatively and apply transferable knowledge to my responsibilities, allowing me to approach challenges from fresh and innovative perspectives.]
+  PARAGRAPH_4:[I am particularly drawn to this opportunity at [COMPANY_NAME] because of your emphasis [COMPANIES GOAL AND PRODUCT] and the alignment to my personal future career goals. I am eager to bring all my knowledge and skills to your team, where I can contribute to ongoing projects and support the maintenance of existing products. Moreover, [COMPANY_CULTURE] enhancing my abilities while contributing to the success of your projects.]
+  PARAGRAPH_5:[Thank you for considering my application. I look forward to the opportunity to further discuss how I can contribute to the success of [COMPNAY_NAME].]
+  Sincerely,
+
+  Albert Einstein
+
+SYS_CONT_MOTIV : |
+  I provide you two documents: document_1, a job description I want to apply for and document 2, information regarding me. write a motivation letter based on the TEMPLATE. don't use determinisic tune.use probabilistic for example instead of "perfectly", use "may perfectly": 
+  TEMPLATE=[motiv_temp]
+
+SYS_CONT_CV : |
+  I provide you two information: info_1, a job description I want to apply for and inf_2, the list of my experiences. sort the experiences from most relevant and important to least. [IMPORTANT:RETURN THE SORTED LIST OF EXPEREINCE IDs in list (ARRAY).DON NOT RETURN ANYTHING ELSE].
+
+DOCS_PATH : './doc_outputs'
